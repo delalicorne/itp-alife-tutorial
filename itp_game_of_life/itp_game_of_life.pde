@@ -1,4 +1,4 @@
-int cellSize = 8;
+int cellSize = 1;
 int[][] cells; // the state of the system: a w * h matrix with 0's for the dead cells and 1's for the living cells
 int[][] tempCells; // used for buffer swaps
 int w, h; // the number of cells per row and columns
@@ -34,7 +34,15 @@ int sumNeighbors(int x, int y) {
 void evoState() {
   for (int x = 0; x < w; x++) {
      for (int y = 0; y < h; y++) {
-         
+         int sum = sumNeighbors(x, y);
+         if (cells[x][y] == 0) {
+             if (sum == 3) tempCells[x][y] = 1;
+             else tempCells[x][y] = 0;
+         }
+         if (cells[x][y] == 1) {
+            if (sum >= 2 && sum <= 3) tempCells[x][y] = 1;
+            else tempCells[x][y] = 0;
+         }
      }
   }
   for (int x = 0; x < w; x++) for (int y = 0; y < h; y++) cells[x][y] = tempCells[x][y];
