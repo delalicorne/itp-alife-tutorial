@@ -27,16 +27,16 @@ void initField() {
   int[] cy = new int[numCenters];
   float[] centerPeakVal = new float[numCenters];
   for (int i = 0; i < numCenters; i++) {
-     cx[i] = (int) random(w);
-     cy[i] = (int) random(h);
-     centerPeakVal[i] = random(-1, 1);
+     cx[i] = (int) (random(w) * 0.2 + w * 0.3);
+     cy[i] = (int) (random(h) * 0.2 + h * 0.3);
+     centerPeakVal[i] = random(-1, 1) * 3;
   }
   
   for (int x = 0; x < w; x++) {
      for (int y = 0; y < h; y++) {
          for (int i = 0; i < numCenters; i++) {
              float dx = x - cx[i]; float dy = y - cy[i]; float d = sqrt(sq(dx) + sq(dy));
-             f[x][y] += centerPeakVal[i] / (1.0 + d / (w / 10));
+             f[x][y] += centerPeakVal[i] / (1.0 + d / (w / 100));
          }
      }
   }
@@ -55,7 +55,12 @@ float fieldLaplacian(int x, int y) {
 void evoField() {
    for (int x = 0; x < w; x++) {
       for (int y = 0; y < h; y++) {
-          
+          df[x][y] += fieldLaplacian(x, y);
+      }
+   }
+   for (int x = 0; x < w; x++) {
+      for (int y = 0; y < h; y++) {
+         f[x][y] += df[x][y];
       }
    }
 }

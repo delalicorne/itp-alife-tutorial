@@ -1,4 +1,4 @@
-// Smoothlife by Stephan Rafler
+// Based on by Stephan Rafler
 
 class Uni {
   

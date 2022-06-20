@@ -1,6 +1,6 @@
-// Joe Wezorek
+// Hex GoL variant invented by Joe Wezorek
 
-int cellSize = 6;
+int cellSize = 2;
 int[][] cells;
 int[][] tempCells;
 // We will understand that each cell with an odd row number is to be shifted by half a cell width to the right
@@ -10,10 +10,10 @@ int w, h;
 void setup() {
   size(800, 800);
   initCells();
+  background(0);
 }
 
 void draw() {
-  background(0);
   evoCells();
   drawCells();
 }
