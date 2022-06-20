@@ -86,7 +86,12 @@ class Uni {
   
   float nextVal(int x, int y) {
      float innerAverage = compInnerAverage(x, y), outerAverage = compOuterAverage(x, y);
-     return smoothIndicator(outerAverage, smoothSelector(birthOne, deathOne, innerAverage, innerSmoothness), smoothSelector(birthTwo, deathTwo, innerAverage, innerSmoothness), outerSmoothness);
+     return smoothIndicator(
+        outerAverage, 
+        smoothSelector(birthOne, deathOne, innerAverage, innerSmoothness), 
+        smoothSelector(birthTwo, deathTwo, innerAverage, innerSmoothness), 
+        outerSmoothness
+     );
   }
   
 
@@ -108,18 +113,7 @@ class Uni {
          }
       }
   }
-  void smoothEvo() {
-      for (int x = 0; x < w; x++) {
-         for (int y = 0; y < h; y++) {
-            bufmat[x][y] = nextVal(x, y);
-         }
-      }
-      for (int x = 0; x < w; x++) {
-         for (int y = 0; y < h; y++) {
-            mat[x][y]  = constrain(mat[x][y] + (2 * bufmat[x][y] - 1.0) * mat[x][y] * 0.05, 0, 1);
-         }
-      }
-  }
+ 
 }
 
 Uni uni;
